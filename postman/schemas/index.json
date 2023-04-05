@@ -1,0 +1,1248 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Portal do Agente",
+        "description": "",
+        "contact": {
+            "email": "sistemas@gx2.com.br"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3333",
+            "description": "Api desenvolvimento"
+        },
+        {
+            "url": "http://servidorgx2.ouroeprata.com/api",
+            "description": "Api produção"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "user_type": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/user": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
+                                                },
+                                                "user_type": {
+                                                    "type": "string"
+                                                },
+                                                "createdAt": {
+                                                    "type": "string"
+                                                },
+                                                "updatedAt": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/agency": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Agency"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Agency"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Agency"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            },
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Agency"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "take",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Agency_List"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/agency/{id}": {
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Agency"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Agency_List"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/ticket-agent": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Ticket Agent"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ticket_Agent"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket_Agent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            },
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Ticket Agent"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "take",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ticket_Agent_Agency"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/ticket-agent/{id}": {
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Ticket Agent"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticket_Agent_Agency"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/parameters": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Parameters"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Parameters"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Parameters"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            },
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Parameters"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "response": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Parameters"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/me": {
+            "put": {
+                "summary": "",
+                "tags": [
+                    "User Logged"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "integer",
+                                        "minimum": 1
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "enum": [
+                                            "FEMALE",
+                                            "MALE"
+                                        ]
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            },
+            "get": {
+                "summary": "",
+                "tags": [
+                    "User Logged"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "response": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Parameters"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/me/change-password": {
+            "put": {
+                "summary": "",
+                "tags": [
+                    "User Logged"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/trip/origem/{typeTrip}": {
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Trip"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "typeTrip",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "INTERMUNICIPAL",
+                                "INTERSTADUAL"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/trip/destino/{typeTrip}/{codeOrigem}": {
+            "get": {
+                "summary": "",
+                "tags": [
+                    "Trip"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "typeTrip",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "INTERMUNICIPAL",
+                                "INTERSTADUAL"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "codeOrigem",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/trip/consultaHorario/{typeTrip}": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Trip"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "typeTrip",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "INTERMUNICIPAL",
+                                "INTERSTADUAL"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codeOrigin": {
+                                        "type": "string"
+                                    },
+                                    "codeDestiny": {
+                                        "type": "string"
+                                    },
+                                    "departureDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "infoLinha": {
+                                            "type": "object",
+                                            "properties": {
+                                                "codeOrigin": {
+                                                    "type": "string"
+                                                },
+                                                "codeDestiny": {
+                                                    "type": "string"
+                                                },
+                                                "dateInital": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                }
+                                            }
+                                        },
+                                        "horarios": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "servico": {
+                                                        "type": "string"
+                                                    },
+                                                    "saida": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "chegada": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "modalidade": {
+                                                        "type": "string"
+                                                    },
+                                                    "preco": {
+                                                        "type": "string"
+                                                    },
+                                                    "chave_horario": {
+                                                        "type": "string"
+                                                    },
+                                                    "codigo_classe": {
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        },
+        "/trip/consultaHorario/mapaPoltronas/{typeTrip}": {
+            "post": {
+                "summary": "",
+                "tags": [
+                    "Trip"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "typeTrip",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "INTERMUNICIPAL",
+                                "INTERSTADUAL"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codeOrigin": {
+                                        "type": "string"
+                                    },
+                                    "codeDestiny": {
+                                        "type": "string"
+                                    },
+                                    "departureDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "chaveHorario": {
+                                        "type": "string",
+                                        "example": "00000000:0000000000"
+                                    },
+                                    "codigoClasse": {
+                                        "type": "integer"
+                                    },
+                                    "service": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "status": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "LIBERADA",
+                                                    "BLOQUEADA"
+                                                ]
+                                            },
+                                            "tipo": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "LIBERADA",
+                                                    "BLOQUEADA/SELECIONADA/RESERVADA",
+                                                    "VENDIDA"
+                                                ]
+                                            },
+                                            "armchair": {
+                                                "type": "integer"
+                                            },
+                                            "position": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "janela",
+                                                    "corredor"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "Unauthorized": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "field": {
+                                        "type": "string",
+                                        "example": "token"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Usuário não autenticado!"
+                                    },
+                                    "statusCode": {
+                                        "type": "integer",
+                                        "example": 401
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "204": {
+                "description": "No body returned for response"
+            }
+        },
+        "schemas": {
+            "Auth": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AuthUser": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "genre": {
+                        "type": "string",
+                        "enum": [
+                            "MALE",
+                            "FEMALE"
+                        ]
+                    },
+                    "avatar": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "apiName": {
+                        "type": "string"
+                    },
+                    "userApi": {
+                        "type": "string"
+                    },
+                    "apiKey": {
+                        "type": "string"
+                    },
+                    "passwordApi": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Ticket_Agent": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "genre": {
+                        "type": "string",
+                        "enum": [
+                            "FEMALE",
+                            "MALE"
+                        ]
+                    },
+                    "document": {
+                        "type": "string"
+                    },
+                    "cell_phone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "LEGAL",
+                            "PHYSICAL"
+                        ]
+                    },
+                    "total_bus": {
+                        "type": "boolean"
+                    },
+                    "agencyId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Ticket_Agent_Agency": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "genre": {
+                        "type": "string",
+                        "enum": [
+                            "FEMALE",
+                            "MALE"
+                        ]
+                    },
+                    "document": {
+                        "type": "string"
+                    },
+                    "cell_phone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "LEGAL",
+                            "PHYSICAL"
+                        ]
+                    },
+                    "total_bus": {
+                        "type": "boolean"
+                    },
+                    "agencyId": {
+                        "type": "integer"
+                    },
+                    "Agency": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "document": {
+                                "type": "string"
+                            },
+                            "ie": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "landline": {
+                                "type": "string"
+                            },
+                            "cell_phone": {
+                                "type": "string"
+                            },
+                            "whatsapp_phone": {
+                                "type": "string"
+                            },
+                            "total_bus": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            },
+            "Agency": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "document": {
+                        "type": "string"
+                    },
+                    "ie": {
+                        "type": "string"
+                    },
+                    "cell_phone": {
+                        "type": "string"
+                    },
+                    "landline": {
+                        "type": "string"
+                    },
+                    "whatsapp_phone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "total_bus": {
+                        "type": "boolean"
+                    },
+                    "Address": {
+                        "type": "object",
+                        "properties": {
+                            "cep": {
+                                "type": "string"
+                            },
+                            "country": {
+                                "type": "string"
+                            },
+                            "uf_state": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "neighborhood": {
+                                "type": "string"
+                            },
+                            "street_name": {
+                                "type": "string"
+                            },
+                            "street_number": {
+                                "type": "number"
+                            },
+                            "complement": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "Agency_Manager": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "document": {
+                                "type": "string"
+                            },
+                            "rg": {
+                                "type": "string"
+                            },
+                            "genre": {
+                                "type": "string",
+                                "enum": [
+                                    "MALE",
+                                    "FEMALE"
+                                ]
+                            }
+                        }
+                    },
+                    "Bank_data": {
+                        "type": "object",
+                        "properties": {
+                            "bank": {
+                                "type": "string"
+                            },
+                            "bank_account": {
+                                "type": "number"
+                            },
+                            "bank_agency": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            },
+            "Agency_List": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "document": {
+                        "type": "string"
+                    },
+                    "ie": {
+                        "type": "string"
+                    },
+                    "cell_phone": {
+                        "type": "string"
+                    },
+                    "landline": {
+                        "type": "string"
+                    },
+                    "whatsapp_phone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "total_bus": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
